@@ -1,0 +1,104 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Digital-7 Mono', monospace; /* A digital clock style font */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #282c34;
+    color: #61dafb;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+}
+
+
+button:active {
+    transform: translateY(2px); /* Simple click animation */
+}
+
+.stopwatch {
+    text-align: center;
+    padding: 30px;
+    background: #20232a;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.stopwatch:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
+}
+
+#display {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #61dafb;
+    color: #282c34;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #21a1f1;
+}
+
+/* Enhancements for lap records in styles.css */
+.laps {
+    margin-top: 20px;
+    max-width: 300px;
+    padding: 10px;
+    background: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    overflow-y: auto; /* Allows scrolling if many laps are recorded */
+    max-height: 200px; /* Limit height and enable scrolling */
+}
+
+.lap {
+    padding: 8px;
+    margin: 5px;
+    background-color: #444;
+    color: #fff;
+    border-left: 5px solid #61dafb; /* Color indicator for each lap */
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.lap:nth-child(odd) { /* Alternate colors for better differentiation */
+    background-color: #505050;
+}
+
+.lap:hover {
+    background-color: #575757;
+    transform: scale(1.03); /* Slight scale on hover for interactive feel */
+}
+/* Custom scrollbar styles for laps container */
+.laps::-webkit-scrollbar {
+    width: 8px;
+}
+
+.laps::-webkit-scrollbar-track {
+    background: #20232a;
+}
+
+.laps::-webkit-scrollbar-thumb {
+    background-color: #61dafb;
+    border-radius: 10px;
+}
+
+.laps::-webkit-scrollbar-thumb:hover {
+    background-color: #21a1f1;
+}
+
+
+
+@font-face {
+    font-family: 'Digital-7 Mono';
+    src: url('fonts/Digital-7Mono.ttf') format('truetype');
+}
