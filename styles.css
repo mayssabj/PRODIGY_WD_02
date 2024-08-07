@@ -5,60 +5,123 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #282c34;
+    overflow: hidden;
+    position: relative;
     color: #61dafb;
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    background: radial-gradient(circle at top left, #141E30, #243B55);
 }
 
-
-button:active {
-    transform: translateY(2px); /* Simple click animation */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
-.stopwatch {
-    text-align: center;
-    padding: 30px;
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 600px; /* Increased the max-width for better scaling */
+    position: relative;
+    z-index: 1;
+}
+
+.watch {
+    position: relative;
+    width: 500px; /* Significantly increased the size of the watch */
+    height: 500px; /* Significantly increased the size of the watch */
+    border-radius: 50%;
+    background: rgba(32, 35, 42, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.watch-face {
+    position: relative;
+    width: 400px; /* Significantly increased the size of the watch face */
+    height: 400px; /* Significantly increased the size of the watch face */
+    border-radius: 50%;
     background: #20232a;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(97, 218, 251, 0.5);
+    margin-bottom: 20px; /* Add space between the circle and the time */
 }
 
-.stopwatch:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
+.time {
+    font-size: 4.5em; /* Significantly increased the font size */
+    color: #61dafb;
+    text-shadow: 0 0 10px rgba(97, 218, 251, 0.8);
+    animation: blink 1s step-end infinite;
 }
 
-#display {
-    font-size: 3em;
-    margin-bottom: 20px;
+@keyframes blink {
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+    margin-top: -40px; /* Move buttons closer to the watch face */
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 1.2em;
+    padding: 20px 40px; /* Significantly increased button padding */
+    font-size: 1.5em; /* Significantly increased font size */
     margin: 5px;
     border: none;
     border-radius: 5px;
     background-color: #61dafb;
     color: #282c34;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(2px); /* Simple click animation */
 }
 
 button:hover {
     background-color: #21a1f1;
+    transform: scale(1.1); /* Scale effect on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Shadow effect on hover */
+}
+
+.btn.running {
+    animation: pulse 1s infinite; /* Pulse animation when running */
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
 }
 
 /* Enhancements for lap records in styles.css */
 .laps {
     margin-top: 20px;
-    max-width: 300px;
+    width: 100%;
     padding: 10px;
-    background: #333;
+    background: rgba(51, 51, 51, 0.9);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.25);
     overflow-y: auto; /* Allows scrolling if many laps are recorded */
     max-height: 200px; /* Limit height and enable scrolling */
+    animation: fadeIn 1s ease-out;
 }
 
 .lap {
@@ -68,6 +131,7 @@ button:hover {
     color: #fff;
     border-left: 5px solid #61dafb; /* Color indicator for each lap */
     transition: background-color 0.2s, transform 0.2s;
+    animation: fadeInSlideIn 0.5s ease forwards; /* Animation for lap entry */
 }
 
 .lap:nth-child(odd) { /* Alternate colors for better differentiation */
@@ -78,6 +142,30 @@ button:hover {
     background-color: #575757;
     transform: scale(1.03); /* Slight scale on hover for interactive feel */
 }
+
+/* Animation keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 /* Custom scrollbar styles for laps container */
 .laps::-webkit-scrollbar {
     width: 8px;
@@ -95,8 +183,6 @@ button:hover {
 .laps::-webkit-scrollbar-thumb:hover {
     background-color: #21a1f1;
 }
-
-
 
 @font-face {
     font-family: 'Digital-7 Mono';

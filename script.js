@@ -16,12 +16,14 @@ function startStop() {
         startTime = new Date().getTime();
         tInterval = setInterval(getShowTime, 1);
         startStopBtn.textContent = 'Stop';
+        startStopBtn.classList.add('running');
         lapResetBtn.textContent = 'Lap';
         running = true;
     } else {
         clearInterval(tInterval);
         savedTime = difference;
         startStopBtn.textContent = 'Start';
+        startStopBtn.classList.remove('running');
         lapResetBtn.textContent = 'Reset';
         running = false;
     }
@@ -50,19 +52,16 @@ function lapReset() {
     }
 }
 
-
-
 function getShowTime() {
     updatedTime = new Date().getTime();
     if (savedTime) {
         difference = (updatedTime - startTime) + savedTime;
     } else {
-        difference =  updatedTime - startTime;
+        difference = updatedTime - startTime;
     }
     let hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((difference % (1000 * 60)) / 1000);
-    let milliseconds = Math.floor((difference % (1000 * 60)) / 100);
     hours = (hours < 10) ? "0" + hours : hours;
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
